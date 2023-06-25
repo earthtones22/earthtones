@@ -1,0 +1,765 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilgrimage - Earthtones</title>
+    <!-- aframe -->
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
+    
+    <!-- js -->
+    <script src="https://cdn.jsdelivr.net/npm/a-super-sky@1.1.1/super-sky.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script src="loading.js"></script>
+    
+    
+        <!-- boostrap -->
+    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"/>
+
+    <!-- css -->
+    <link rel="stylesheet" href="style.css" >
+
+  </head>
+  <body>
+
+    <div id="splash" >
+      
+        <div class="display">
+          <img src="./assets/loading/pilgrime_horizontal.png" class="logo-loading"/>
+            <div class="display-text">
+              
+              <h2 class="text-center">welcome to pilgrimage</h2>
+              
+              <p class="text-justify" >
+                Earth Tone's first exhibit, explore the dunes to find the artwork from 6 artists. To navigate use your arrow keys or WASD on desktop and on mobile use 1 finger to move forward and 2 to move backward.
+                Once you encounter an artwork simply click on it, a pop-up will appear to further investigate the work. Learn more about the artist and their work by reading their interviews in the viewing page.
+                Happy Trails!</p>
+                <p>Happy Trails!</p>
+            </div>
+            <div class="display-image">
+              <img
+              src="./assets/loading/wasd.png"
+              alt="wasd"
+              class="image-loading"
+              />
+              <img
+              src="./assets/loading/look around.png"
+              alt="look around"
+              class="image-loading"
+              />
+            </div>
+        </div>
+        <div class="loading"></div>
+      <div class="start-button">Enter Room</div>
+      
+    </div>
+
+
+ 
+
+<a-scene renderer="antialias: true;
+                   colorManagement: true;
+                   sortObjects: true;
+                   physicallyCorrectLights: true;
+                   maxCanvasWidth: 1920;
+                   maxCanvasHeight: 1920;"
+    shadow="type: pcfsoft"
+	  reflection="directionalLight:#dirlight;"
+    gltf-model="dracoDecoderPath: https://cdn.jsdelivr.net/npm/three@0.129.0/examples/js/libs/draco/gltf/;"
+    loading-screen="dotsColor: white; backgroundColor: black">
+    
+    <!-- camera -->
+        <a-entity id="rig" 
+        position="42.412 5.5 306.9"
+        rotation="0 17.03 0"
+        raycaster="objects: .modal"
+        movement-controls="speed:1;"
+        origin-on-ar-start>
+            <a-entity id="camera" 
+            camera 
+            look-controls="pointerLockEnabled: false"
+            simple-navmesh-constraint="navmesh:.navmesh;fall:0.4;height:0;"
+            cursor="rayOrigin: mouse">
+            </a-entity>
+        </a-entity>
+
+    <!-- asset management system -->
+    <a-assets timeout="3000">
+    
+      <!-- image -->
+      <img id="ashley"crossorigin="anonymous" src="./assets/ashley.jpg">
+      <img id="zoe"crossorigin="anonymous" src="./assets/zoe.png">
+      <img id="fav1"crossorigin="anonymous" src="./assets/fav1.jpg">
+      
+      <!-- gltf -->
+      <a-asset-item id="walk-gltf" src="./assets/walk.glb" timeout="5000"></a-asset-item>
+      <a-asset-item id="ocone-edward" src="./assets/ocone-edward.glb" timeout="5000"></a-asset-item>
+      <a-asset-item id="apple" src="./assets/appledollscan1.glb" timeout="5000"></a-asset-item>
+      
+      <!--portal -->
+      <img id="amphibiousportal"crossorigin="anonymous" src="./assets/amphibiousportal.png">
+
+    </a-assets>
+
+
+    <!-- environment -->
+    <a-entity light="type: ambient; color: #BBB; intensity: 0.1" visible=""></a-entity>
+
+    <a-super-sky 
+        orbitduration="50" throttle="70" startpercent=".07"
+        groundcolor="#FDD9B5" sunintensity="0.7"></a-super-sky>
+    
+     <a-entity id="environment" scale="2 2 6" environment="preset: yapavai; skyType: none; dressing: stones; dressingColor: #C66344; seed: 5; playArea: 0.5; groundColor: #C66344; groundColor2: #c96b4b; active: true; skyColor: #FDD9B5; horizonColor: #bf854a; shadowSize: 12; lightPosition: 0.5 1 0; fog: 0.4; groundYScale: 18; dressingAmount: 11; dressingScale: 0.06; dressingOnPlayArea: 1; gridColor: #FDD9B5" shadow="" visible=""><a-entity class="environment" position="0 50 0" light="type: hemisphere; color: #feecda; intensity: 0.6; groundColor: #C66344" visible=""></a-entity><a-entity class="environment" position="0.5 1 0" light="intensity: 0.6; shadowCameraLeft: -12; shadowCameraBottom: -12; shadowCameraRight: 12; shadowCameraTop: 12" visible=""></a-entity><a-entity rotation="-90 0 0" class="environmentGround environment" visible="" scale="2 2 6" shadow="cast: false; receive: false"></a-entity><a-entity class="environmentDressing environment" visible=""></a-entity><a-sky radius="200" theta-length="110" class="environment" material="" visible="false" geometry=""></a-sky></a-entity>
+     
+
+    <!-- portal -->
+    
+      <a-link title="Homepage" href="/index.html" position="-39.048 6.605 -137.479" scale="3 3 3" rotation="2.332 35.758 0" image="https://res.cloudinary.com/hello-monday-studio/image/upload/v1664724901/earthtones.art/portalg_da2g9u.png";></a-link> 
+      <a-link title="To Amphibious" href="../ampibhious/index.html" position="-28.400 6.124 -139.800" scale="3 3 3" rotation="1.435 12.08 -0" image="#amphibiousportal"> </a-link>
+      <a-entity id="leftHand" link-controls="hand: left"></a-entity>
+      <a-entity id="rightHand" link-controls="hand: right"></a-entity>
+    
+
+
+    <!--model  -->
+    
+    <!-- plane model -->
+    
+    <a-plane id="ashley" src="#ashley" data-toggle="modal" data-target="#1ashley" position="37.731 7.297 145.941" rotation="0 -8 0" width="6.954" height="7.875" shadow="" material="" geometry="width: 6.36; height: 8"></a-plane>
+    <a-plane id="zoe" src="#zoe" data-toggle="modal" data-target="#2zoe" position="37.789 6.57392 270.60" rotation="0 10 0" width="6.36" height="8.448" shadow="" material="" geometry="" geometry="width: 6.36; height: 8"></a-plane>
+    <a-entity id="walk" gltf-model="#walk-gltf"   position="28.712 2.009 87.955" rotation="0 0 0" width="6.36" height="8.448" animation-mixer="" shadow="" material="" geometry="width: 6.36; height: 8"><a-box depth="3" height="8" width="3" material="visible:false;" data-toggle="modal" data-target="#3walk"></a-box></a-entity>
+    <a-entity id="ocone" gltf-model="#ocone-edward" data-toggle="modal" data-target="#5ocone" position="-23.255 6.861 13.614" rotation="0 50 0" width="3.4" height="4.4" shadow="" material="" geometry="width: 6.36; height: 8"></a-entity>
+    <a-entity id="apple" gltf-model="#apple" data-toggle="modal" data-target="#4apple" position="-8.756 3.812 226.0" rotation="0 67 0" width="3.4" height="4.4" shadow="" material="" geometry="width: 6.36; height: 8" scale="2 2 2"></a-entity>
+    <a-plane src="#fav1" data-toggle="modal" data-target="#6favielle" position="-19.475 5.963 -88.752" rotation="0 50 0" width="3.4" height="4.4" shadow="" material="" geometry="width: 6.36; height: 8"></a-plane>
+
+
+    <!-- lighting -->
+   
+    
+</a-scene>
+
+
+
+    <!-- modal pop up -->
+       <!-- ashley -->
+       <div
+       class="modal fade modal-fullscreen footer-to-bottom"
+       id="1ashley"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="modal"
+       aria-hidden="true">
+         
+       <div class="modal-dialog animated fadeInDown">
+         <div class="modal-content">
+           <div class="modal-header">
+             <button
+               type="button"
+               class="close"
+               data-dismiss="modal"
+               aria-hidden="true"
+             >
+             <i class="fa fa-times" aria-hidden="true"></i>
+             </button>
+           </div>
+           <div class="modal-body">
+            
+            <div class="box0">
+              <p>Miss    Expanding Universe aka Ashley Yang-Thompson aka Trashley is the author of the underground self-help cult-classic How to be the worst laziest fattest most incontinent piece-of-shit in the world EVER, published by Bateau Press. She is the co-mastermind of WORM SLUT, a Portland-based weekly zine that celebrates mesh crop tops, the Right To Be Lazy, burritos, spending beyond your means and the metonymy of sucking. 
+                <br><br>
+                How do you stay in your skin? Butoh hands claw their way out of Russian Doll-like figures growing out of each other. 
+                Tally marks count the days in a literal prison or the prison of one's mind. Sticky notes keep tabs on runaway thoughts. 
+                Windows serve as tiny portals into a traumatic past that refuses to die in the living mind.
+                
+                    <br><br><br>
+                Interview:
+                <br><br>
+                ET: What are you reading right now <br><br>
+                Ash: I’ve been obsessively reading Jonathan Franzen’s oeuvre in the past month… The Corrections, Freedom (crying in the coffee shop), Purity, and now Crossroads. Also Julia Kristeva’s Powers of Horror.   <br><br>
+                
+                
+                ET: Has a work of art ever changed you or been pivotal to your life or saved you<br><br>
+                
+                I experienced Stendhal Syndrome -- a psychosomatic condition involving rapid heartbeat, confusion and even hallucinations, allegedly occurring when individuals become exposed to artworks or phenomena of great beauty and antiquity -- firsthand when I entered Pippilotti Rist’s Pixel Forest exhibition at the New Museum. I felt as though I had recaptured my child’s eye, the anti-inflammatory sense of wonder that allows for things to be something other than what they appear to be…<br><br>
+                
+                
+                ET: What's your love life like<br><br>
+                
+                Ash: I’m obsessed with colleague who has a partner, I sat on a married man’s face who was old enough to be grandfather every afternoon last summer, I have millennial voicenote sex with a poet across the country, I’m attracted to balding men because I never knew my father, I’m a serial seduce & destroyer, and I’m a closeted lesbian. These are all half truths.  <br><br>
+                
+                
+                ET: What is your favorite food<br><br>
+                
+                Ash: Burritos & meat sticks, but mostly I stick to my “health mounds,” which is also my favorite word for cunt. <br><br>
+                
+                
+                ET: What do you think of the word "work"<br><br>
+                
+                Work is necessary. Someone has to do it. If no one was working, no one would be manufacturing toilets, and I’d have to poop out the window.
+                That being said, the dancer Susan Rethorst wrote in the remarkable essay “Play Profound” that rigor is doing whatever it takes to play profound, which rings psychic cherries of felt truth. <br><br>
+                
+                
+                ET: Are you burnt out ever<br><br>
+                
+                Ash: Yes.  <br><br>
+                ET: How do you cope with burnout<br><br>
+                
+                Ash: I drink a bunch of magnesium water and shit until I feel empty inside.<br><br>
+                ET: What is your go to karaoke song<br><br>
+                Ash: Phantom of the Opera
+                </p>
+                  </div>
+                
+                  <div class="box1">
+                    <img src="./assets/ashley.png"
+                    class="image-title" />
+                  </div>
+                
+                    <!-- <model-viewer> HTML element -->
+                   <model-viewer id="model-viewer" bounds="tight" enable-pan src="./assets/ashley.glb" 
+                   camera-controls environment-image="neutral" background-color="#000000" shadow-intensity="1" 
+                   autoplay camera-orbit="90.35deg 85.7deg auto">
+                    <div class="progress-bar hide" slot="progress-bar">
+                        <div class="update-bar"></div>
+                    </div>
+                  
+                </model-viewer>
+
+           </div>
+           </div>
+    
+         </div>
+       </div>
+
+       <!-- zoe -->
+       <div
+       class="modal fade modal-fullscreen footer-to-bottom"
+       id="2zoe"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="modal"
+       aria-hidden="true">
+         
+       <div class="modal-dialog animated fadeInDown">
+         <div class="modal-content">
+           <div class="modal-header">
+             <button
+               type="button"
+               class="close"
+               data-dismiss="modal"
+               aria-hidden="true"
+             >
+             <i class="fa fa-times" aria-hidden="true"></i>
+             </button>
+           </div>
+           <div class="modal-body">
+            
+            <div class="box0">
+              <p>Zoe Dedes (Montreal-born & based) is an artist, educator and holistic practitioner. Currently completing a BFA in Art Education at Concordia University with a Minor in Psychology. Working towards a Masters in Creative Arts Therapies. Zoe makes ceramics, paintings and photography that examine how nature, intuition and connection are negotiated through sensorial/perceptual phenomenon/phenomena? Her influences are eclectic and rooted in her multicultural upbringing and community. Favorite hobby: Gardening. She believes in community development through the arts.  
+                <br><br>
+                Zoe’s painting SECRETGARDEN has been exhibited at the VAV Gallery Montreal, Canada (2022) and was published in print for the InArte Journal (2022). Keep up with her social media for local Paint Nights, art and plant content.  
+            
+            
+                <br><br><br>
+            Interview:
+            <br><br>
+            ET: what are you reading right now <br><br>
+            Zoe: The Doors of Perception by Aldous Huxley
+            The Body Keeps Score by Bessel Van der Kolk
+            <br><br>
+            ET: Has a work of art ever changed you or been pivotal to your life or saved you
+            <br><br>
+            Zoe: Art has made a steady impact on my life and path. I have learned a lot about myself and my body through art. Music  has been one way I regulate emotions. Rhythms, hobbies and creative routines can be influential. But my love for art and history are also related. Mantra Map is inspired by a painting of a garden in the Deccan Plateau in India from the late 17th century. 
+            <br><br>
+            ET: do you believe that art can save lives
+            <br><br>
+            Zoe: I believe art has the ability to make people feel good. There is power in creative methods of expression. Art induces creative focus and letting go, having a similar effect to your body as meditation. Art can be a distraction – it also creates the space for learning, listening and understanding in special and individualized ways.  
+            <br><br>
+            ET: how do you approach your art
+            <br><br>
+            Artists are forever students.<br>
+            Zoe: Artists are forever students. Right now, there is always room for improvement. In this way, art has allowed me to let go
+             <br><br>
+            ET: whats your love life like
+            <br><br>
+            Zoe: Karmic
+            <br><br>
+            ET: do you think trauma is an overused word
+            <br><br>
+            Zoe: Depends on the context. There is a lot of power in our words and our self-talk. Our interpretations have a direct impact on our emotional processing and growth. It is crucial to be kind to yourself, but also realistic about what you’ve experienced in order for proper healing to occur.   
+            <br><br>
+            ET: do you keep a journal or diary
+            <br><br>
+            Zoe: I keep a journal and a sketchbook. I find the practice of writing useful for checking in on yourself, for releasing, and for planning. My sketchbooks feature handwritten research notes and poetry, as a way to track my inspirations.  &#128133;
+            <br><br>
+            ET: how has your art changed, how have you changed, has the pandemic changed you and your approach to art
+            <br><br>
+            For me, art is a process of exchange, practice and development. In my personal practice, I am guided by my interests, hobbies and moods. As an art educator, I am always looking for new and old concepts and practices to share. I also learn a lot through and from my students.   
+            <br><br>
+            ET: do you believe that solitude is necessary for an art practice
+            <br><br>
+            Zoe: As an introvert, my art practices require solitude and focus.
+            <br><br>
+            ET: whats the general process of making a piece for you
+            <br><br>
+            Zoe: Sketch - Colour Palettes - Begin Execution – Never Finish a piece
+            <br><br>
+            ET: what is your daily routine approx.
+            <br><br>
+            Zoe: Priorities are drink water, brush teeth, coconut oil pulling. Maintaining an organized agenda. Cat cuddling.
+            <br><br>
+            ET: do you have a routine
+            <br><br>
+            Zoe: Adulthood is 15% vaccuming.<br>
+            I have 25 + houseplants keeping me company in my apartment. Part of my routine includes watering and maintaining relationships with them through conversation.
+            <br><br>
+            ET: do you have a uniform that you work in
+            <br><br>
+            Zoe: I wear overalls when I teach art.
+            <br><br>
+            ET: wWhat do you do when you’re not creating art?
+            <br><br>
+            Zoe: I recently completed a Bachelors in Art Education and am working towards applying for a Masters in Creative Arts Therapy. Outside of school, I host Paint & Sips and facilitate paint parties of all sorts. Its a dream job! I spend a lot of time gardening, watching things grow and learning about herbalism.
+            <br><br>
+            ET: what do you collect
+            <br><br>
+            Zoe: Sea shells, Plants, Books,  Magnets
+            <br><br>
+            ET: what are you fringe interests, what would you study or be an expert if you had the time
+            <br><br>
+            Zoe: I used to Major in Anthropology. Back then, I hoped to travel, dig for treasures and uncover weird alien fossil critters.<br>
+            This alternate universe ties into my interest in Art History and how we can understand human evolution and psychology through art and artifact.<br>
+            I am also deeply interested in psychedelic therapy and its potential combination with art therapy. Passionate about all things herbal medicine, microdose and alchemizing elements for natural wellness.
+            <br><br>
+            ET: what would another life look like for you
+            <br><br>
+            Zoe: Tropical Forest -  Sun - Beach – Juice Bar & Art Cafe – Family & Pets
+            <br><br>
+            ET: what is your favorite way to communicate ex: words, images, movement
+            <br><br>
+            Zoe: Telepathically
+            <br><br>
+            ET: what is your favorite form of language 
+            <br><br>
+            Zoe: Passing Notes in Class
+            <br><br>
+            ET: do you make playlists, what's on your recent one if so
+            <br><br>
+            Zoe: I make playlists according to season. For me, sound and time are connected. I organize them this way to keep track of how I may be feeling, overtime. Not effective for organizing music by genre...
+            
+            </p>
+                  </div>
+                
+                  <div class="box1">
+                    <img src="./assets/zoededes.png"
+                    class="image-title" />
+                  </div>
+                
+                    <!-- <model-viewer> HTML element -->
+                   <model-viewer id="model-viewer" bounds="tight" enable-pan src="./assets/zoe.glb"  
+                   camera-controls environment-image="neutral" background-color="#000000" 
+                   shadow-intensity="1" autoplay camera-orbit="90.35deg 85.7deg auto">
+                    <div class="progress-bar hide" slot="progress-bar">
+                        <div class="update-bar"></div>
+                    </div>
+                   
+                </model-viewer>
+
+           </div>
+           </div>
+    
+         </div>
+       </div>
+
+       <!-- walk -->
+
+       <div
+       class="modal fade modal-fullscreen footer-to-bottom"
+       id="3walk"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="modal"
+       aria-hidden="true">
+         
+       <div class="modal-dialog animated fadeInDown">
+         <div class="modal-content">
+           <div class="modal-header">
+             <button
+               type="button"
+               class="close"
+               data-dismiss="modal"
+               aria-hidden="true"
+             >
+             <i class="fa fa-times" aria-hidden="true"></i>
+             </button>
+           </div>
+           <div class="modal-body">
+            
+            <div class="box0">
+              <p>Bryce’s work brings an untroubled perspective to the mundane by injecting satire into the daily happenings of life. With exaggerated forms, shapes and endearing grins, Bryce’s work will bring you nothing short of a good time. Guaranteed or your time back.
+                <br><br><br>
+            Interview:
+            <br><br>
+            ET: Can you tell me a little bit about your art style and what triggers your imagination? 
+            <br><br>
+            Bryce: My style could be described as an oval with three dots and a curved line. It’s hard to say what triggers my imagination. It happens when it happens and sometimes it doesn’t happen. I’ll go through old sketchbooks and think “how in the world did I come up with this?”. In that moment, something clicked and that’s cool.  
+            <br><br>
+            ET: I notice in your work, your subjects are majority inanimate objects or animals. What is your interest in there or have you always just dreamed of having a conversation with a caterpillar?
+            <br><br>
+            Bryce: I like things that don’t have faces yet and slappin’ a good ol’ smiley on. When I see a caterpillar crawling along a leaf, I know, deep down, all that caterpillar wants is to smile and tell me, “life is good.
+            <br><br>=
+            ET: Was this your first time working with 3D objects? If so, how was it and could you give a little insight to your process?
+            <br><br>
+            Bryce: t was my first time completing something substantial in 3D. I tried making a donut once. The process was led entirely by YouTube tutorials with a little hint of my own direction. Learning any new software is a nightmare at first.  
+            <br><br>
+            ET: What is the relationship with your work and to the theme of pilgrimage.
+            <br><br>
+            Bryce: I guess my pilgrimage would be my move to Montreal. A search for something more, something greater. As far as the work, the ghost seems to have become enlightened as they now carry a star of achievement. Like you would from your teacher after getting a B+ on the test.
+            <br><br>
+            ET: Do you have any major inspirations? Can be within the art realm, could be books, movies, music, the world is your oyster!
+            <br><br>
+            Bryce: Airplane safety cards you read before flight, that pesky squirrel that lives under my balcony, dry humor, those sun bleached posters you see in shop’s windows.
+            <br><br>
+            ET: When is the last time you lost track of time
+            <br><br>
+            I had to check the time when I woke up this morning. 
+            <br><br>
+            </p>
+              </div>
+                
+                  <div class="box1">
+                    <img src="./assets/aspinal.png"
+                    class="image-title" />
+                  </div>
+                
+                    <!-- <model-viewer> HTML element -->
+                   <model-viewer id="model-viewer" bounds="tight" enable-pan src="./assets/walker.glb" 
+                   camera-controls environment-image="neutral" background-color="#000000" shadow-intensity="1" 
+                   autoplay camera-orbit="90.35deg 85.7deg auto">
+                    <div class="progress-bar hide" slot="progress-bar">
+                        <div class="update-bar"></div>
+                    </div>
+                </model-viewer>
+
+           </div>
+           </div>
+    
+         </div>
+       </div>
+       
+       <!-- apple -->
+
+       <div
+       class="modal fade modal-fullscreen footer-to-bottom"
+       id="4apple"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="modal"
+       aria-hidden="true">
+         
+       <div class="modal-dialog animated fadeInDown">
+         <div class="modal-content">
+           <div class="modal-header">
+             <button
+               type="button"
+               class="close"
+               data-dismiss="modal"
+               aria-hidden="true"
+             >
+             <i class="fa fa-times" aria-hidden="true"></i>
+             </button>
+           </div>
+           <div class="modal-body">
+            
+            <div class="box0"> 
+              <blockquote id="mailpopup">
+              
+              <p>Hello ?
+              <br><br>
+                  This past autumn, my blossoming interest in hardware was pollinated by an unexpected gift, a Macintosh Plus computer from the late 1980s.
+              The computer came into my possession through an act of urban gleaning.
+              It seemed fitting that the computer's next life be powered by a gleaned source as well.
+              In December 2021, I powered the Macintosh plus with one gigantic 'apple battery'.
+              Over 50 rotting apples were connected with pennies, nails and wire in a series circuit.
+              An apple-powered, Apple computer ran MacPaint.
+              To house my power source, I built a cabinet out of used-sweet-corn crates that held the apples (forming the battery), as well as the apples that could no longer supply power (that were immortalized as apple dolls).
+              As a gift for helping run the next iteration of the apple, you will get to carve an apple doll that once dried will be further immortalized as a 3D scan.
+              You may keep the scan but I will take the apple doll as a souvenir for my travel.
+                <br><br>
+                <a href="mailto:sarah@prettysecrets.net">Send an email to me here with name and location to add yourself to my apple doll pilgrimage. </a>
+                
+              </p>
+              </blockquote>
+              <p>
+                <br><br>  
+                  My name is Sarah Holloway. I use she/her pronouns. I am from what is now called Oakville, Ontario, Canada, on the traditional lands of the Haudenosaunee, the Anishnabek Nation, the Attawandaron, and the Mississaugas of the Credit. My education began at OCAD University before transferring to the Rhode Island School of Design (RISD) to complete a degree in furniture design. 
+                  <br><br>
+                  In times of isolation, I have been keen to lean on my nonhuman relationships, getting to know the plants and ecosystem around me. Over the past few years I have grown twin flame interests in computation and ecology; Hitting the inspect button in a web browsers and on walks around my neighbourhood. With an education in craft, (primarily woodworking,) I am curious how these older ways of knowing impact my primarily self-taught education in computation.
+                  <br><br><br>
+              Interview:
+              <br><br>
+              ET: How would you describe your relationship with your apple dolls? 
+              <br><br>
+              Sarah: Relics of power. Endearing, some of them were made by friends and have a face that takes after them, artistically I mean.    
+              <br><br>
+              ET: The thing I love about your work is the two forms it can take, the ephemeral physical apple and the scanned apple which can live on basically forever- or until the internet crashes. I’d love to hear you talk about duality and how these two different forms function in your work. <br><br>
+              Sarah: Heir and a spare. No. It has less to do with archival work and more to further a formal exploration of the apple dolls as a subject matter. The apple dolls are kinda hand-held sculptures. They are meant to be touched and are not precious. So 3D scanning, allowing for full 360 manipulations seemed like the best fit. I intended for the project to titer between digital and physical. I saw digitizing the apple dolls as a nice bridge between the analog of digital parts of the project. 
+              <br><br>
+              ET: What is the relationship with your work and to the theme of pilgrimage. 
+              <br><br>
+              Sarah: A pilgrimage to me is a journey of significance and of some distance. Perhaps a transformation of sorts occurs.  I’ve anthropomorphized the apple dolls enough to see them as little people who physically and digitally travel to their audience. Their dignification and journey on to the Earthtone website is a travel that has greatly affected them. Secondly, the work is meant to generate a map of sorts of people interested in the project which hypothetically the apples could travel along.
+              <br><br>
+              ET: Walk us through a little bit of your process in creating this work?.
+              <br><br>
+              Sarah: I glean most of my materials. What is available then determines a lot of my practice. Fate had it that I was gifted a  Macintosh Plus computer from a friend in the fall, during apple season. I had been thinking about comparisons of material yesteryears, or less common objects and systems that could be used as metaphors for teaching myself more complex systems…Like when you are in science class and you do a lot of practice circuits 
+              <br><br>
+              ET: Is a majority of your practice based digitally? Specifically in 3D scanning or do you have a large studio practice as well?
+              <br><br>
+              Sarah: I have a studio practice as well. I am going to school to study furniture making which provides me with an understanding of fine woodworking and some metalsmithing and textile fabrication. Furniture design is not what I do primarily, though it is fun, the skills I learn are definitely reflected in my sculptural practice. I have only started using 3D scanning software but it has been very fun to play with within CNC fabrication. Currently, I am making a series of CNC’d bark samples in Oak wood.
+              <br><br>
+              ET: Do you have any major inspirations? Can be within the art realm, could be books, movies, music, the world is your oyster!
+              <br><br>
+              Sarah: As corny as it sounds, I have recently remembered that I love reading. I have been falling down a rabbit hole of hyper-text which started with a recommendation by a professor of mine, S.A Chavarrã­a, to read Julio Cortázar’s Hopscotch. 
+              <br><br>
+              I just started a part-time job that has me looking at Telidon, a pre-internet,  Pseudo-internet system in Canada during the ’80s. This has gotten me to research early internet art and computer art from the ‘80’s to contextualize this work more. There is an exhibit going on at Interacess in Toronto in Spring 2023. 
+              <br><br>
+              </p>
+            </div>
+                
+                  <div class="box1">
+                    <img src="./assets/sarah.png"
+                    class="image-title" />
+                  </div>
+                
+                    <!-- <model-viewer> HTML element -->
+                   <model-viewer id="model-viewer" bounds="tight" enable-pan src="./assets/appledollscan1.glb"  
+                   camera-controls environment-image="neutral" background-color="#000000" shadow-intensity="1" 
+                   autoplay camera-orbit="90.35deg 85.7deg auto">
+                    <div class="progress-bar hide" slot="progress-bar">
+                        <div class="update-bar"></div>
+                    </div>
+                
+                </model-viewer>
+
+           </div>
+           </div>
+    
+         </div>
+       </div>
+
+       <!-- ocone -->
+
+       <div
+       class="modal fade modal-fullscreen footer-to-bottom"
+       id="5ocone"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="modal"
+       aria-hidden="true">
+         
+       <div class="modal-dialog animated fadeInDown">
+         <div class="modal-content">
+           <div class="modal-header">
+             <button
+               type="button"
+               class="close"
+               data-dismiss="modal"
+               aria-hidden="true"
+             >
+             <i class="fa fa-times" aria-hidden="true"></i>
+             </button>
+           </div>
+           <div class="modal-body">
+            
+            <div class="box0"><p>Adrian Ocone is a multimedia artist originally from Ojai California. They work between digital mediums, painting, drawing, sound performance, and sculpture. They are interested in collaborative relations, relations with tools, and structures of thinking in art making. They are currently completing a bachelors degree in painting at the Rhode Island School of Design. 
+              
+              <br><br><br>
+          Interview:
+          <br><br>
+          ET: Can you walk us through your process in creating this work? Thought process, hardwear, ideas, so on..<br><br>
+          Adrian: This work began as an experiment of seeing how much artificial information I could put into Google street-view photospheres before their autofiltering would block it. Admittedly I wasn’t able to get very far with the 3d models I was trying to use so I moved to using the 3JS library as an alternative viewing platform for these images. It also gives me the advantage of being able to combine the photosphere environment with an interface of my choosing, in this case superimposing my own hands. This is in continuation of a series of paintings/photo collages I’ve done in reference to first person video games like Elder Scrolls or Quake. I’ve come to associate that high field of view “look” with mediation from one's environment or dissociation of some kind. I think it is just kind of funny too, especially here using the imagery of Twilight and a freeway overpass above the 95 freeway in Providence, both of which feel monolithic and detached yet also familiar and kind of goofy to me. I don’t think there's any more of a thesis here than in any of my other work, but maybe there is some comparison to be made between pop-culture and large, public works projects. I’m mostly concerned with the aspect of experimentation.  
+           <br><br>
+          
+          
+          
+          ET: One of the obvious themes in your work is the influence of twilight, so are you team Edward or Jacob? Also is it important for you to have twilight as such a large part of your work?
+          <br><br>
+          Adrian: I guess I have to be team Edward… I’ve only seen the Twilight movies in the past two years, maybe it would be different if I had read the books or seen the movies when they originally came out. I like Jacob, but the way the character is treated in the last movie freaks me out too much, maybe it also has to do with Robert Pattinson being more in the public eye right now. I also just think vampires are awesome. As far as Twilight’s influence on me, I just really appreciate it and I think it’s cool to make something more along the lines of fan art. It seems a lot more straightforward and genuine since it’s a pretty direct reaction to another piece of media. Like people having cover bands or something. There's a lot to pull from when it comes to Twilight, a lot of things that have aged strangely or make it an artifact. I’m definitely going to continue pulling from it.
+          <br><br>
+          ET: What is the relationship with your work and to the theme of pilgrimage. 
+          <br><br>
+          Adrian: I definitely see everything I make as relational. Making some kind of temporary space for collaboration or communication. In that way I relate it to pilgrimage, there is always effort involved in trying to enter that space, whether it is seamless or incredibly difficult. Think about trying to play music with others and how tenuous that can be, everyone has to find some way to enter that space and move through it together. For me there is not a grounding aspect of art by default, I definitely have to figure it out over again each time. I don’t have much of a particular grounding in space either, I can’t say I’m particularly connected to any of the places I’ve lived in a similar way.
+          <br><br>
+          ET: Do you have a routine? If so what does it entitle, if you swagger from it how does it affect your day?
+          <br><br>
+          Adrian: I’d love to have more of a routine. I hate waking up past 10:30am, but my sleep schedule is inconsistent. I definitely think of myself as being fragile or at least easily imbalanced. I need to figure out a way to live…
+          <br><br>
+          ET: What do you believe makes a good artist? Or “good” art?
+          <br><br>
+          Adrian: I think I'm most drawn to people who work intuitively/in an improvisational way. I think things like social engagement may be the most important, but an openness to the work definitely benefits the social aspect. People like Dieter Rot, Cecil Taylor, and David Toop are definitely role models for both their openness and the social aspect of the work. Also, I feel ever-attached to the idea of being prolific. I think that’s somewhat attached to being able to work intuitively. Sometimes that comes in the way of course, getting caught up in the details of something or working in ways that don't lend themselves to quantity. It’s all just an effort to enjoy oneself anyways.
+          <br><br>
+          The aforementioned people are definitely among my absolute favorites. I’m inspired by my friend Yuqing, my parent’s cat. I really like slow tv, Wikimedia, I like working with synthesizers and hardware a lot, it’s hard for me to motivate myself to watch movies, it’s even harder for me to watch tv. I love Mark Fell, Soil Thornton, Kali Malone, Bjork. Also, environmental sound, landscapes. I feel like I’m very easily excited, but also very easily distracted! I’m definitely forgetting something essential.
+          </p>
+            </div>
+                
+                  <div class="box1">
+                    <img src="./assets/adrianocone.png"
+                    class="image-title" />
+                  </div>
+                  <a target="_blank" rel="noopener noreferrer" href="./ocone/index.html" class="link-ocone">
+                    Click Me: FORKS WASHINGTON PROJECTIONS</a>
+                
+                    <!-- <model-viewer> HTML element -->
+                   <model-viewer id="model-viewer" bounds="tight" enable-pan src="./assets/ocone-edward.glb" 
+                  camera-controls environment-image="neutral" background-color="#000000" shadow-intensity="1" 
+                  autoplay camera-orbit="90.35deg 85.7deg auto">
+                    <div class="progress-bar hide" slot="progress-bar">
+                        <div class="update-bar"></div>
+                    </div>
+                    
+                </model-viewer>
+
+           </div>
+           </div>
+    
+         </div>
+       </div>
+
+       <!-- favielle -->
+       <div
+       class="modal fade modal-fullscreen footer-to-bottom"
+       id="6favielle"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="modal"
+       aria-hidden="true">
+         
+       <div class="modal-dialog animated fadeInDown">
+         <div class="modal-content">
+           <div class="modal-header">
+             <button
+               type="button"
+               class="close"
+               data-dismiss="modal"
+               aria-hidden="true"
+             >
+             <i class="fa fa-times" aria-hidden="true"></i>
+             </button>
+           </div>
+           <div class="modal-body">
+
+  <div class="box0">
+    <p>Favielle "Fav" Petit Clair (she/her) is a Queer Haitian emerging multidisciplinary textile artist based in Tiohtià:ke, Montreal.  She gained technical experience at the Centre des textiles Contemporains de Montréal (2019). She continues her studies at École des métiers des faubourgs-de-montréal in Fashion and Custom Clothing. With a focus on weaving, she revisits the stories of Black slaves and Afro-descendant individuals of North America and their relationship with the discipline. Petit Clair’s artistic and artisanal approach is a form of preservation of techniques and traditions in remembrance of those who weaved before her on this continent. 
+<br><br>
+
+1. Crossroads : Choosing in face of the linear, collage (2020)  8.5" x 11"<br>
+2. Pilgrimage I: The line, collage (2020)  8.5" x 11"<br>
+3. Pilgrimage II: When does it end?, collage (2020)  8.5" x 11"<br>
+4. Pilgrimage III: Agency, collage (2020)  8.5" x 11"<br>
+5. Pilgrimage IV: Infinity, collage (2020)  8.5" x 11"<br>
+
+
+    <br><br><br>
+Interview:
+<br><br>
+ET: Has a work of art ever changed you or been pivotal to your life or saved you <br><br>
+Fav: I haven’t realized how much music has shaped me. My life is really aligned with the music I listen to, the music I discover and the music I have listened to. When I listen to music I am conscious, you know. The weather, the light, the mood I'm in, the clothes I'm wearing. And if I had to pick one song that has been enlightening it would be the opening theme song of Steven Universe by Rebecca Sugars. *Sings* If I could begin to be half of what you think of me, I could do about anything, I could even learn how to love like you. Man, that’s the one…That’s the one.   
+<br><br>
+ET: What do you think of the professionalization of art
+<br><br>
+Fav: Yo! *Sighs* This is actually a dilemma of mine. I am actually a very private person and my art is, in my eyes, intimate. I feel like that professionalization of art  in way means being out there… naked *laughs*. Or, wait, I found my discomfort ! It’s actually this idea of success that comes with professionalization. To be professional to me is to aim for some sort of success. What are the scales of success when it comes to being a professional artist? To me, right now, in 2022, it would be making the people close to me proud. Success also looks like being a part of my community, able to afford a reasonable life, living at my own pace and keeping my privacy. I want it all you know and the idea of professionalization of my art makes me feel like I'm getting closer and further from that ideal of mine. But eh, life is long I have time to figure it out *laughs*.
+<br><br>
+ET: Do you think trauma is an overused word
+<br><br>
+Fav: I used to think it was… Until I came face to face with my own! I’m used to downplaying my traumas and it’s actually been very healing to confront them and be honest about them. When I first started dealing with my traumas I was surely overexposing myself to them. And to some extent still do… I think it is a trendy word right now and its position in culture is interesting. What does it mean about me, about us. This focus on trauma in my life has shed light on my desire to break this cycle. Trauma informed me of those heavy burden I was carrying and giving space to my trauma allowed me to open more space to my *thinks* peace, ease, healing… I don’t know if these are the right words, but when I look at my trauma it definitely makes me consider the idea of spaciousness. I make space within myself for empathy, patience, sadness, anger, love. This allows me to soothe my trauma.   
+<br><br>
+ET: How do you begin
+<br><br>
+Fav: I realized…Honestly I don’t *laughs*. I feel like I’m being meta for no reason, but this is how I think of my work ethics. I don’t begin and I don’t end, I continue. I’m always working and that actually soothes me. I’m a workaholic *laugh*. I laugh because, I realize that at 25 I'm really reframing the words that I use. Making them truly mine. So what I mean by I am a workaholic is that I love working and committing to projects. I love being busy even when it’s challenging. So when “start” a project it is actually the logical continuation of my train of thoughts. I find it uplifting to say “I am taking the next logical step”. And that can look like taking a break, eating, weaving, walking, listening to music, going to the library, looking at my notes etc. And from continuation there’s consistency, amelioration, discipline, commitment. My artistic path is a pilgrimage wink wink *laughs*. 
+<br><br>
+ET: Do you have a routine
+<br><br>
+Fav: Ah yes ! I am but an animal of routine! My biggest routine is my morning habits. I am an early bird and if I sleep in UNSCHEDULED my day is…To me my day “ends” at 12pm so I usually get most of my laborious tasks before that. Homeworks, cleaning, meetings etc. Obviously it is more common to work in the afternoon so I adapted *laughs* Ideally I would work in the morning and enjoy the rest of my day. *Sighs* but the mornings are short…so short and the work piles up! But these short mornings are my moments. Oh! Also random urges to clean are part of my routine! These are the most exciting cleaning sessions I have, the rush of I don’t know what just taking over me and then boom I clean, until I’m satisfied or exhausted. 
+<br><br>
+ET:  Do you define yourself as an artist, what qualities make that word for you
+<br><br>
+Fav: This goes back to the Steven Universe theme song written by Rebecca Sugar. I have discomfort thinking of myself as an artist. My friends, teachers and acquaintances consider me to be an artist. They say it with respect. Slow and steady are the qualities of an artist to me. I used to think I would never be an artist and now I'm applying to grants for emerging artists, you know? Who knows, maybe in 5 years I’ll be comfortable embodying what an artist is. <br><br>
+ET: What is your current obsession
+<br><br>
+Fav: Weirdly enough…I am obsessed with the color green that I consider my least favorite color ! I’m even wearing green ! *Laughs* Green! I was so adamant like 3 years ago about my hate for green. Oh how things change, I wonder if the color laughs at me. Poison green, jealous green, greedy green reframed in my life. I don’t know, I feel like it means something this shift. 
+<br><br>
+ET: What is your current obsession
+<br><br>
+Fav: Weirdly enough…I am obsessed with the color green that I consider my least favorite color ! I’m even wearing green ! *Laughs* Green! I was so adamant like 3 years ago about my hate for green. Oh how things change, I wonder if the color laughs at me. Poison green, jealous green, greedy green reframed in my life. I don’t know, I feel like it means something this shift. 
+<br><br>
+ET: What do you collect
+<br><br>
+Fav: I collect my thoughts, I write alot. Parcelles of words and ideas that I keep. Pieces of paper with my writings. I will collect a bunch of songs written down on multiple post-its. I will collect ideas I have, recipes, books to read all written down on multiple pieces of papers. When I have too much I discard them. Nonetheless it’s my collection. My favorite collection is the letters I have been given. I am attached to reading them. 
+</p>
+  </div>
+
+  <div class="box1">
+    <img src="./assets/favielle.png"
+                    class="image-title" />
+  </div>
+
+    <!-- <model-viewer> HTML element -->
+   <model-viewer id="model-viewer" bounds="tight" enable-pan src="./assets/fav.glb"  
+   camera-controls environment-image="neutral" background-color="#000000" shadow-intensity="1" 
+   autoplay camera-orbit="90.35deg 85.7deg auto">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+</model-viewer>
+
+           </div>
+           </div>
+    
+         </div>
+       </div>
+    <!-- js + script -->
+    <script>
+      document.querySelector("#model-viewer").addEventListener('ar-status', (event) => {
+        if(event.detail.status === 'failed'){
+          const error = document.querySelector("#error");
+          error.classList.remove('hide');
+          error.addEventListener('transitionend',(event) => {
+            error.classList.add('hide');
+          });
+        }
+      });
+    </script>
+
+    <script>
+          // Handles loading the events for <model-viewer>'s slotted progress bar
+        const onProgress = (event) => {
+        const progressBar = event.target.querySelector('.progress-bar');
+        const updatingBar = event.target.querySelector('.update-bar');
+        updatingBar.style.width = `${event.detail.totalProgress * 100}%`;
+        if (event.detail.totalProgress === 1) {
+          progressBar.classList.add('hide');
+        } else {
+          progressBar.classList.remove('hide');
+          if (event.detail.totalProgress === 0) {
+            event.target.querySelector('.center-pre-prompt').classList.add('hide');
+          }
+        }
+      };
+      document.querySelector('model-viewer').addEventListener('progress', onProgress);
+    </script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <!-- <script src="./script.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+  </body>
+
+</html>
